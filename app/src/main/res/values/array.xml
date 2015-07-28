@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="attributes_array">
+        <item>@string/attribute_name</item>
+        <item>@string/attribute_description</item>
+        <item>@string/attribute_price</item>
+        <item>@string/attribute_quantity</item>
+        <item>@string/attribute_priority</item>
+        <item>@string/attribute_voice</item>
+        <item>@string/attribute_image</item>
+        <item>@string/attribute_reminder</item>
+        <item>@string/attribute_location</item>
+        <item>@string/attribute_web_source</item>
+    </string-array>
+</resources>
