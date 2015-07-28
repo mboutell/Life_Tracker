@@ -1,5 +1,6 @@
 package edu.rose_hulman.life_tracker;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -14,9 +15,19 @@ import android.widget.Toast;
 public class ChooseAttribtuteDialog extends DialogFragment{
 
     private boolean[] activeAttributes = new boolean[10];
-    private List list;
+    private static final String KEY_ACTIVE_ATTRIBUTES = "KEY_ACTIVE_ATTRIBUTES";
+//    private List mList;
+
+    public static ChooseAttribtuteDialog newInstance(boolean[] activeAttributes){
+        ChooseAttribtuteDialog chooseAttribtuteDialog = new ChooseAttribtuteDialog();
+        Bundle args = new Bundle();
+        chooseAttribtuteDialog.setArguments(args);
+        args.putBooleanArray(KEY_ACTIVE_ATTRIBUTES, activeAttributes);
+        return chooseAttribtuteDialog;
+    }
 
     public Dialog onCreateDialog(Bundle b){
+        activeAttributes = getArguments().getBooleanArray(KEY_ACTIVE_ATTRIBUTES);
         AlertDialog.Builder chooseAttributeBuilder = new AlertDialog.Builder(getActivity());
         chooseAttributeBuilder.setMultiChoiceItems(R.array.attributes_array, activeAttributes, new MultiClickListener());
         chooseAttributeBuilder.setNegativeButton(R.string.attribute_dialog_cancel_button, new ClickListener());
@@ -74,7 +85,8 @@ public class ChooseAttribtuteDialog extends DialogFragment{
                 dismiss();
             }
             else if (which == DialogInterface.BUTTON_POSITIVE){
-                list.saveActiveAttributes(activeAttributes);
+//                mList.saveActiveAttributes(activeAttributes);
+                ((ListEdit)getActivity()).getList().saveActiveAttributes(activeAttributes);
                 dismiss();
             }
         }

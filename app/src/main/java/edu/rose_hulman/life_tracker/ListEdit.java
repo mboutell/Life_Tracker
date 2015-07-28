@@ -19,11 +19,14 @@ public class ListEdit extends ListActivity{
     public static final long NO_ID_SELECTED = -1;
     private long mSelectedId = NO_ID_SELECTED;
     private String name;
+    private List mList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_edit);
+
+        mList = new List();
 
         mMakeItemAdapter = new MakeItemAdapter(this);
         mMakeItemAdapter.open();
@@ -60,6 +63,10 @@ public class ListEdit extends ListActivity{
         mCursorAdapter.changeCursor(cursor);
     }
 
+    public List getList(){
+        return mList;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -78,7 +85,7 @@ public class ListEdit extends ListActivity{
 
         switch (id){
             case R.id.edit:
-                df = new ChooseAttribtuteDialog();
+                df = ChooseAttribtuteDialog.newInstance(mList.getActiveAttributes());
                 df.show(getFragmentManager(), null);
                 break;
             case R.id.add_item:
@@ -90,9 +97,5 @@ public class ListEdit extends ListActivity{
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void updateView(){
-
     }
 }

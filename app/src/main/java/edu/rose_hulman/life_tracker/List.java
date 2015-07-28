@@ -9,6 +9,7 @@ import java.util.HashSet;
 public class List {
     private HashMap<Attribute, Item> items = new HashMap<>();
     private HashSet<Attribute.AttributeType> activeAttributes = new HashSet<>();
+    private boolean[] activeAttributesArray = new boolean[10];
     private String name;
     private long mId;
 
@@ -48,9 +49,9 @@ public class List {
         return this.items;
     }
 
-    public HashSet<Attribute.AttributeType> getActiveAttributes(){
-        return this.activeAttributes;
-    }
+    //public HashSet<Attribute.AttributeType> getActiveAttributes(){
+    //    return this.activeAttributes;
+    //}
 
     public void setAttributeActive(Attribute.AttributeType attribute){
         if(!this.activeAttributes.contains(attribute)) {
@@ -66,7 +67,12 @@ public class List {
             if(savedAttributes[i] && !activeAttributes.contains(new Attribute(i).getAttributeType())){
                 activeAttributes.add(new Attribute(i).getAttributeType());
             }
+            activeAttributesArray[i] = savedAttributes[i];
         }
+    }
+
+    public boolean[] getActiveAttributes(){
+        return activeAttributesArray;
     }
 
 //    public void addToList(Attribute attribute, String data){
